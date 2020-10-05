@@ -11,7 +11,7 @@
 
 Each branch with a name related to the B1 contains the source code for that branch and a compiled binary file in the root folder.
 
-If you want to go the easy route just copy the bin file onto your SD card in the motherboard (not TFT) and reboot. Once it is done you should have a FIRMWARE.CUR fie on the SD. That menas it worked.
+If you want to go the easy route just copy the bin file onto your SD card in the motherboard (not TFT) and reboot. Once it is done you should have a FIRMWARE.CUR file on the SD. That menas it worked.
 
 If you'd like to make futher tewaks to the configs then you are more than welcome to submit issues or pull requests.
 
