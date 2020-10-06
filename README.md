@@ -1,4 +1,4 @@
-# Marlin 3D Printer Firmware
+# Marlin 3D Printer Firmware for BIQU B1
 
 ![GitHub](https://img.shields.io/github/license/marlinfirmware/marlin.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/marlinfirmware/marlin.svg)
@@ -7,22 +7,46 @@
 
 <img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
 
+You are here because you are looking for the latest BIQU B1 firmware and you will hopefully find what you are looking for! Read below to find out how.
+
 ## Using this repo.
 
-Each branch with a name related to the B1 contains the source code for that branch and a compiled binary file in the root folder.
+People love to add on to their printers. For this reason there cannot be just a single Marlin firmware that satisfies all of the variations of B1 out there. This repo aims to create firmware for the most popular variations and keep it up to date with the latest Marlin releases.
 
-If you want to go the easy route just copy the bin file onto your SD card in the motherboard (not TFT) and reboot. Once it is done you should have a FIRMWARE.CUR file on the SD. That menas it worked.
+Each B1 variant is stored in a branch. You don't need to know much about github to know how to select the correct branch for your printer. It's really easy. Just select the name that best matches your variation of the B1 from the drop down list and you will be on the correct branch.
 
-If you'd like to make futher tewaks to the configs then you are more than welcome to submit issues or pull requests.
+The available branches or B1 variants are:
+
+Branch Name | Variant Properties
+------------ | -------------
+B1_STOCK | If you have built your B1 out of the box and done nothing else to it then this is the branch for you.
+B1_ABL | If you have added an ABL sensor (BL Touch or other) then this is the branch for you. This does a 3x3 probe on the bed which is not the highest resolution but is often enough for beds that are not badly warped.
+B1_ABL_HIGH_RES | If you have added an ABL sensor (BL Touch or other) and you want a higher res on the bed probing because of slightly more warping and are happy to pay a small time penalty at the start of each print then this is for you.
+B1_ABL_SUPER_RES | If you have added an ABL sensor (BL Touch or other) and you want an incredibly high res probe of the bed and are willing to wait a few minutes extra at the start of each print then this is for you.
+B1_ABL_SFS | Coming soon...
+
+![Step1](/step1_branch.png)
+
+Once you have selected a branch you will have access to the source code as well as the compiled binary file (the firmware that you need to put on your SD card) for that branch. Most of you will not care about the source code and are here for the compiled firmware but I made the source available anyways. To download the firmware simply follow the steps in the next pictues.
+
+![Step2](/step2_firmware.png)
+
+![Step2](/step3_download.png)
+
+Once you have downloaded the firmware file just copy the it onto your SD card in the motherboard (not TFT) and reboot. Once it is done you should have a FIRMWARE.CUR file on the SD. That means it worked.
+
+### Want to help?
+
+If you'd like to make futher tweaks to the configs then you are more than welcome to submit issues or pull requests.
 
 Hopefully we will be able to grow this repo to include configs and builds for a variety of common implementations of the B1 which will save people a lot of frustration.
 
 ### Supported Platforms
 
-BIQU B1 With others coming soon (BX - Here's looking at you sexy)..o
+BIQU B1 With others coming soon (BX - Here's looking at you sexy)...
 
 ## License
 
-Marlin is published under the [GPL license](/LICENSE) because we believe in open development. The GPL comes with both rights and obligations. Whether you use Marlin firmware as the driver for your open or closed-source product, you must keep Marlin open, and you must provide your compatible Marlin source code to end users upon request. The most straightforward way to comply with the Marlin license is to make a fork of Marlin on Github, perform your modifications, and direct users to your modified fork.
+Marlin is published under the [GPL license](/LICENSE) because we believe in open development. The GPL comes with both rights and obligations. Whether you use Marlin firmware as the driver for your open o...
 
 While we can't prevent the us....bla...bla...bla
