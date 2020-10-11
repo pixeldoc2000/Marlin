@@ -11,9 +11,9 @@ You are here because you are looking for the latest BIQU B1 firmware and you wil
 
 ## Using this repo.
 
-People love to add on to their printers. For this reason there cannot be just a single Marlin firmware that satisfies all of the variations of B1 out there. This repo aims to create firmware for the most popular variations and keep it up to date with the latest Marlin releases.
+People love to add on to their printers. For this reason there cannot be just a single Marlin firmware that satisfies all of the variations of B1 out there. This repo aims to create firmware for the most popular variants and keep it up to date with the latest Marlin releases.
 
-Each B1 variant is stored in a branch. You don't need to know much about github to know how to select the correct branch for your printer. It's really easy. Just select the name that best matches your variation of the B1 from the drop down list and you will be on the correct branch.
+Each B1 variant is stored in a branch. You don't need to know much about github to know how to select the correct branch for your printer. It's really easy. Just select the name that best matches your variant of the B1 from the drop down list and you will be on the correct branch.
 
 The available branches or B1 variants are:
 
@@ -33,7 +33,16 @@ Once you have selected a branch you will have access to the source code as well 
 
 ![Step2](/step3_download.png)
 
-Once you have downloaded the firmware file just copy the it onto your SD card in the motherboard (not TFT) and reboot. Once it is done you should have a FIRMWARE.CUR file on the SD. That means it worked.
+## Using the Firmware
+
+Before installing the firmware take note of the following points:
+
+  1.) The ABL versions of this firmware use the probe as the z-endstop. I prefer this method over using a dedicated z-endstop switch.
+  2.) The ABL versions of this firmware are programmed to apply any z babysteps to the z-offset. This means that if you save your babysteps the nozzle will alwasy start in the right place for each print regardless of what you do to your bed provided that you don't mess with the position of the BL touch between prints (e.g. take apart the hotend).
+
+To install: once you have downloaded the firmware file just copy the it onto your SD card in the motherboard (not TFT) and reboot. Once it is done you should have a FIRMWARE.CUR file on the SD. That means it worked.
+
+I recommend performing a home on all axes directly after installing the firmware and using your finger to trigger the probe on the way down for the z home. This will confirm that the probe is working fine and prevent the nozzle from crashing into the bed if it is not.
 
 ### Want to help?
 
