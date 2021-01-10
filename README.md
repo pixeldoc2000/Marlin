@@ -7,7 +7,9 @@
 
 <img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
 
-You are here because you are looking for the latest BIQU B1 firmware and you will hopefully find what you are looking for! Read below to find out how.
+You are here because you are looking for the latest BIQU B1 firmware and you will hopefully find what you are looking for! 
+
+Before you continue I encourage you to read this gist (https://gist.github.com/looxonline/808a204f4f881462403f2baeefc1f69b) if you are just getting started with your B1 (or if you are experiencing issues with ABL/the nozzle hitting prints). If you are already up and running and are just looking for the latest firmware then continue reading below.
 
 ## Current versions of Marlin and TFT
 
