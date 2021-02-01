@@ -74,16 +74,10 @@ I recommend performing a home on all axes directly after installing the firmware
 
 ## Want to help?
 
-If you'd like to make futher tweaks to the configs then you are more than welcome to submit issues or pull requests.
+If you encounter an issue with the firmware or any of the instructions here then please submit an issue using github.
 
-Hopefully we will be able to grow this repo to include configs and builds for a variety of common implementations of the B1 which will save people a lot of frustration.
-
-## Supported Platforms
-
-BIQU B1 With others coming soon (BX - Here's looking at you sexy)...
+I am also looking for experienced users who are willing to test new versions of the firmware on their machines before being released to a wider audience. If you would like to become a tester then please send me a PM on facebook using the name "Luke Jobs Harrison".
 
 ## License
 
-Marlin is published under the [GPL license](/LICENSE) because we believe in open development. The GPL comes with both rights and obligations. Whether you use Marlin firmware as the driver for your open o...
-
-While we can't prevent the us....bla...bla...bla
+See upstream licenses for source code from Marlin and the BTT TFT.
