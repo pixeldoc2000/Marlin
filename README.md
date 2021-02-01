@@ -1,4 +1,4 @@
-# Marlin 3D Printer Firmware for BIQU B1
+# Firmware and information for BIQU 3D printers
 
 ![GitHub](https://img.shields.io/github/license/marlinfirmware/marlin.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/marlinfirmware/marlin.svg)
@@ -7,25 +7,35 @@
 
 <img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
 
-You are here because you are looking for the latest BIQU B1 firmware and you will hopefully find what you are looking for! 
+You likely have found your way here because you are looking for the latest firmware for your BIQU machine or because you are looking for some information on how to tune your machine/resolve an issue. This repository has been developed over time to include as much valuable information as possible. In order to get the most out of it please read the readme files in detail. This will save you time and help the author to help others who's issues are not covered in this material.
 
-Before you continue I encourage you to read this gist (https://gist.github.com/looxonline/808a204f4f881462403f2baeefc1f69b) if you are just getting started with your B1 or if you are experiencing issues with ABL/the nozzle hitting prints. If you are already up and running and are just looking for the latest firmware then continue reading below.
+This repo currently contains firmware and information related to the following BIQU machines:
 
-## Current versions of Marlin and TFT
+BIQU Machine Model | Latest Marlin Supported | Latest TFT Build
+------------ | ------------- | -------------
+BIQU BX | 2.0.6.1 | Not applicable
+BIQU B1 | 2.0.7.2 | 25 December 2020
 
-The files in this repository contain the source, configs and compiled firmware for Marlin: 2.0.7.2
+## Before you consider firmware
 
-The firmware within this repo uses modified versions of the standard Marlin config files created by the talented @thisiskeithb.
+Many people experience issues which they believe can be solved by firmware but are actually mechanical in nature. In order to help people to solve such issues several "gists" have been compiled which guide you on how to set up the mechanics of your machine. While it is always recommended to run the latest firmware you should definitely take the time to read through these guides first as there are some issues which not even the most refined firmware will solve.
 
-You will also find the latest compiled version of the TFT firmware which has been customized for use with the B1.
+These guide should #definitely# be reviewed if you are assembling your machine for the first time but they should also be reviewed even if you have assembled your machine and just want to squeeze the most out of it. Some of the key issues that they will help you to address are uneven first layers and the nozzle hitting prints.
 
-## Using this repo.
+BIQU Machine Model | Mechanical setup guide
+------------ | -------------
+BIQU BX | Coming soon
+BIQU B1 | https://gist.github.com/looxonline/808a204f4f881462403f2baeefc1f69b
 
-People love to add on to their printers. For this reason there cannot be just a single Marlin firmware that satisfies all of the variations of B1 out there. This repo aims to create firmware for the most popular variants and keep it up to date with the latest Marlin releases.
+## Using the firmware from this repo.
 
-Each B1 variant is stored in a branch. You don't need to know much about github to know how to select the correct branch for your printer. It's really easy. Just select the name that best matches your variant of the B1 from the drop down list and you will be on the correct branch.
+People love to add on to their printers. For this reason there cannot be just a single Marlin firmware that satisfies all of the variations of BIQU printers out there. This repo aims to create firmware for the most popular printer variants and keep it up to date with the latest Marlin releases.
 
-The available branches or B1 variants are:
+Source for the FW is provided so that those with the ability can make additional modifications as they would like.
+
+Each firmware variant is stored in a branch. You don't need to know much about github to know how to select the correct branch for your printer. It's really easy. Just select the name that best matches your printer variant from the drop down list and you will be on the correct branch.
+
+The available branches are:
 
 Branch Name | Variant Properties
 ------------ | -------------
@@ -34,17 +44,17 @@ B1_ABL | If you have added an ABL sensor (BL Touch or other) then this is the br
 B1_ABL_HIGH_RES | If you have added an ABL sensor (BL Touch or other) and you want a higher res on the bed probing because of slightly more warping and are happy to pay a small time penalty at the start of each print then this is for you. This does a 4 x 4 probe.
 B1_ABL_SUPER_RES | If you have added an ABL sensor (BL Touch or other) and you want an incredibly high res probe of the bed and are willing to wait a few minutes extra at the start of each print then this is for you.  This does a 5 x 5 probe.
 B1_UBL_INSANE_RES | READ ME FIRST!!! This branch is strictly in beta. Before you even think about using it you must make sure that you are using this mount for your BL touch and not the stock one: https://www.thingiverse.com/thing:4564987. If you try to use it with the stock mount and the nozzle crashes into the bed then you can't say I didn't warn you. This branch has been designed to help people who have very warped beds (such as the B1 unit I have). Many printers in this range ship like this and many people will just use a glass bed to overcome it. However, I really enjoy the adhesion properties of the SSS bed and therefore wanted to be able to use it, hence this branch was born. The branch uses UBL instead of ABL which basically means that a highly detailed probe of 15 x 15 points is taken on a once off basis and then three points are sampled before each print just to check whether that mesh has changed orientation at all. The results on my bed were remarkable. For detailed usage instructions please follow the gist located here: https://gist.github.com/looxonline/eaa426a1be67148f1cf6242e0e8efbcb
-B1_ABL_SFS | Coming soon...
+B1_ABL_SFS | On hold due to lack of a meaningful userbase.
 
 ![Step1](/step1_branch.png)
 
-Once you have selected a branch you will have access to the source code (Marlin only) as well as the compiled binary file (the firmware that you need to put on your SD card) for that branch. Most of you will not care about the source code and are here for the compiled firmware but I made the source available anyways. To download the firmware for Marlin simply follow the steps in the next pictues.
+Once you have selected a branch you will have access to the source code (Marlin only) as well as the compiled binary file (the firmware that you need to put on your SD card) for that branch. Many of you will not care about the source code and are here for the compiled firmware but I made the source available anyways. To download the firmware for Marlin simply follow the steps in the next pictues.
 
 ![Step2](/step2_firmware.png)
 
 ![Step2](/step3_download.png)
 
-To download the TFT firmware simply locate the TFT zip file in the root directory and download it. Instructions on how to install both follow.
+For printers that use a spearate CPU on the TFT such as the B1, locate the TFT zip file in the root directory and download it. Instructions on how to install both follow.
 
 ## Using the Firmware
 
