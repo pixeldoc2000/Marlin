@@ -31,7 +31,7 @@ BIQU B1 | https://gist.github.com/looxonline/808a204f4f881462403f2baeefc1f69b
 
 People love to add on to their printers. For this reason there cannot be just a single Marlin firmware that satisfies all of the variations of BIQU printers out there. This repo aims to create firmware for the most popular printer variants and keep it up to date with the latest Marlin releases.
 
-Source for the FW is provided so that those with the ability can make additional modifications as they would like.
+Source code for the FW is provided so that those with the ability can make additional modifications as they would like.
 
 Each firmware variant is stored in a branch. You don't need to know much about github to know how to select the correct branch for your printer. It's really easy. Just select the name that best matches your printer variant from the drop down list and you will be on the correct branch.
 
@@ -54,7 +54,7 @@ Once you have selected a branch you will have access to the source code (Marlin 
 
 ![Step2](/step3_download.png)
 
-For printers that use a spearate CPU on the TFT such as the B1, locate the TFT zip file in the root directory and download it. Instructions on how to install both follow.
+For printers that use a spearate processor on the TFT, such as the B1, locate the TFT zip file in the root directory and download it (not required for BX). Instructions on how to install both follow.
 
 ## Using the Firmware
 
