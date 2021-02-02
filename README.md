@@ -5,7 +5,7 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/marlinfirmware/marlin.svg)
 [![Build Status](https://github.com/MarlinFirmware/Marlin/workflows/CI/badge.svg?branch=bugfix-2.0.x)](https://github.com/MarlinFirmware/Marlin/actions)
 
-<img align="right" width=175 src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCRHKSYVnwpH8K9ozq-nNtLA&psig=AOvVaw2ytBmYhtOA3F5eq87IpH_2&ust=1612380678360000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLj11p74y-4CFQAAAAAdAAAAABAM" />
+<img align="right" width=175 src="https://yt3.ggpht.com/ytc/AAUvwniRECzqQDhtX2KDyOL3bc2NMap_PMMvdhDrHGQW3Q=s176-c-k-c0x00ffffff-no-rj" />
 
 [//]: # (<img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />)
 
