@@ -22,7 +22,7 @@ BIQU B1 | 2.0.7.2 | 25 December 2020
 
 Many people experience issues which they believe can be solved by firmware but are actually mechanical in nature. In order to help people to solve such issues several "gists" have been compiled which guide you on how to set up the mechanics of your machine. While it is always recommended to run the latest firmware you should definitely take the time to read through these guides first as there are some issues which not even the most refined firmware will solve.
 
-These guide should #definitely# be reviewed if you are assembling your machine for the first time but they should also be reviewed even if you have assembled your machine and just want to squeeze the most out of it. Some of the key issues that they will help you to address are uneven first layers and the nozzle hitting prints.
+These guides should **definitely** be reviewed if you are assembling your machine for the first time but they should also be reviewed even if you have assembled your machine and just want to squeeze the most out of it. Some of the key issues that they will help you to address are uneven first layers and the nozzle hitting prints.
 
 BIQU Machine Model | Mechanical setup guide
 ------------ | -------------
@@ -52,7 +52,9 @@ The available branches for the BX are:
 Branch Name | Variant Properties
 ------------ | -------------
 BX_ALMOST_STOCK | Use this if you are running an "almost" stock BX. I say almost because it does require you to remove the z-endstop switch which is actually completely unnecessary when running an ABL probe and in fact more of a source of problems than anything else. It otherwise differs from the standard BIQU firmware in that it enables some useful features which have not been enabled in theirs such as automatic z-leveling and linear advance. It also increases the maximum acceleration speeds to levels which are more suited to such a capable printer. You can also apply the fan silencing modification (see the opening gist for the BX) using this firmware but you still have the option to run it without applying the modification.
-BX_UPS | Want to install a mini-UPS into your BX so that you have power loss recovery with the ability to park the print head? Want to have a way to cause the raspberry pi to shut down gracefully after flicking the power switch? This is the branch for you. If you plan to use this branch then take note of the instructions in the gist located here: COMING SOON.
+BX_UPS | Want to install a mini-UPS into your BX so that you have power loss recovery with the ability to park the print head? Want to have a way to cause the raspberry pi to shut down gracefully after flicking the power switch instead of just having power yanked? This is the branch for you. If you plan to use this branch then take note of the instructions in the gist located here: COMING SOON.
+
+Once you are sure about which branch you plan to install, select it from the drop down menu located at the top left of the page.
 
 ![Step1](/step1_branch.png)
 
@@ -62,23 +64,36 @@ Once you have selected a branch you will have access to the source code (Marlin 
 
 ![Step2](/step3_download.png)
 
-For printers that use a spearate processor on the TFT, such as the B1, locate the TFT zip file in the root directory and download it (not required for BX). Instructions on how to install both follow.
+Finally, locate the TFT zip folder in the same file listing and download it.
 
-## Using the Firmware
+## Using the firmware on the B1
 
-Before installing the Marlin firmware take note of the following points:
+If you are not using a B1 then you can skip this part and find the sub-heading that covers the printer that you are using.
+
+By this point you should have both the TFT and the Marlin firmware downloaded. Before installing the Marlin firmware, make sure that you have read any gists linked to that firmware and take note of the following points:
 
 1. The ABL versions of this firmware use the probe as the z-endstop. I prefer this method over using a dedicated z-endstop switch. This means that you will need to remove the z-endstop post that is screwed into the back of the left, upright 4020 extrusion.
 2. The ABL versions of this firmware are programmed to apply any z babysteps to the z-offset. This means that if you save your babysteps the nozzle will always start in the right place for each print regardless of what you do to your bed provided that you don't mess with the position of the BL touch between prints (e.g. take apart the hotend).
 3. The ABL versions of this firmware assume that the probe is located in the position when using the stock mount. If you are using the mount by @thisiskeithb from thingiverse that places the probe in the front-center of the hotend mount then you will need to adjust your z-probe offsets using the LCD. Using the unified interface nagivate to Menu --> Settings --> Machine --> Parameter --> Probe Offset and change the values to: X = -1.5 Y = -34 Z = -1.5.
 
-To install Marlin: once you have downloaded the firmware file just copy it onto your SD card in the motherboard (not TFT) and reboot. Once it is done you should have a FIRMWARE.CUR file on the SD. That means it worked.
+**To install Marlin:** once you have downloaded the firmware file just copy it onto your SD card **in the motherboard (not TFT)** and reboot. Once it is done you should have a FIRMWARE.CUR file on the SD. That means it worked.
 
 If you use an ABL version you will receive an error message relating to EEPROM as soon as you boot up. This is normal. Simply enter the terminal and send M500 in order to clear it.
 
-To install the TFT firmware simply unzip the contents of the zip folder and copy them onto an SD card. Put the SD card into the TFT SD slot and reboot. You will see a series of images on the TFT showing you the status of the update. Do not ignore any errors as doing so will result in your TFT freezing when trying to use it. Rather, try the installation again and if it fails a second time then report the issue in the issue log.
+**To install the TFT firmware:** simply unzip the contents of the zip folder and copy them onto an SD card. Put the SD card into **the TFT SD slot** and reboot. You will see a series of images on the TFT showing you the status of the update. Do not ignore any errors as doing so will result in your TFT freezing when trying to use it. Rather, try the installation again and if it fails a second time then report the issue in the issue log.
 
 I recommend performing a home on all axes directly after installing the firmware and using your finger to trigger the probe on the way down for the z home. This will confirm that the probe is working fine and prevent the nozzle from crashing into the bed if it is not.
+
+## Using the firmware on the BX
+
+If you are not using a BX then you can skip this part and find the sub-heading that covers the printer that you are using.
+
+By this point you should have the TFT graphics and the Marlin firmware downloaded. Before installing it, make sure that you have read any gists linked to that firmware and take note of the following points:
+
+1.) All versions of this firmware use the ABL probe in place of the z-endstop switch. There is no need for you to change any wiring but you will need to physically remove the z-endstop switch from the right upright and unplug it. **Unplugging it alone is not enough.**
+2.) All versions of this firmware support the silent fan modification (see opening gist) but you don't **have** to do the mod if you want to use the firmware. It will work either way.
+
+**To install the firmware:** simply copy the firmware.bin, config.ini and TFT70 files and folders onto the root of a FAT32 formatted SD card. Insert the card into the front facing SD card slot on the BX. Technically both will work but when installing firmware it is best to minimise the possibility of bit errors and the SD card closest to the CPU is the one that will do this. Reboot the machine and the firmware will update. Once the firmware update is complete, make sure that firmware.bin has changed to FIRMWARE.CUR and config.ini has changed to CONFIG.CUR.
 
 ## Want to help?
 
