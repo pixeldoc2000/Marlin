@@ -5,7 +5,7 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/marlinfirmware/marlin.svg)
 [![Build Status](https://github.com/MarlinFirmware/Marlin/workflows/CI/badge.svg?branch=bugfix-2.0.x)](https://github.com/MarlinFirmware/Marlin/actions)
 
-<img align="right" width=175 src="https://yt3.ggpht.com/ytc/AAUvwniRECzqQDhtX2KDyOL3bc2NMap_PMMvdhDrHGQW3Q=s176-c-k-c0x00ffffff-no-rj" />
+<img align="right" width=180 src="https://yt3.ggpht.com/ytc/AAUvwniRECzqQDhtX2KDyOL3bc2NMap_PMMvdhDrHGQW3Q=s176-c-k-c0x00ffffff-no-rj" />
 
 [//]: # (<img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />)
 
@@ -37,7 +37,7 @@ Source code for the FW is provided so that those with the ability can make addit
 
 Each firmware variant is stored in a branch. You don't need to know much about github to know how to select the correct branch for your printer. It's really easy. Just select the name that best matches your printer variant from the drop down list and you will be on the correct branch.
 
-The available branches are:
+The available branches for the B1 are:
 
 Branch Name | Variant Properties
 ------------ | -------------
@@ -47,6 +47,12 @@ B1_ABL_HIGH_RES | If you have added an ABL sensor (BL Touch or other) and you wa
 B1_ABL_SUPER_RES | If you have added an ABL sensor (BL Touch or other) and you want an incredibly high res probe of the bed and are willing to wait a few minutes extra at the start of each print then this is for you.  This does a 5 x 5 probe.
 B1_UBL_INSANE_RES | READ ME FIRST!!! This branch is strictly in beta. Before you even think about using it you must make sure that you are using this mount for your BL touch and not the stock one: https://www.thingiverse.com/thing:4564987. If you try to use it with the stock mount and the nozzle crashes into the bed then you can't say I didn't warn you. This branch has been designed to help people who have very warped beds (such as the B1 unit I have). Many printers in this range ship like this and many people will just use a glass bed to overcome it. However, I really enjoy the adhesion properties of the SSS bed and therefore wanted to be able to use it, hence this branch was born. The branch uses UBL instead of ABL which basically means that a highly detailed probe of 15 x 15 points is taken on a once off basis and then three points are sampled before each print just to check whether that mesh has changed orientation at all. The results on my bed were remarkable. For detailed usage instructions please follow the gist located here: https://gist.github.com/looxonline/eaa426a1be67148f1cf6242e0e8efbcb
 B1_ABL_SFS | On hold due to lack of a meaningful userbase.
+
+The available branches for the BX are:
+Branch Name | Variant Properties
+------------ | -------------
+BX_ALMOST_STOCK | Use this if you are running an "almost" stock BX. I say almost because it does require you to remove the z-endstop switch which is actually completely unnecessary when running an ABL probe and in fact more of a source of problems than anything else. It otherwise differs from the standard BIQU firmware in that it enables some useful features which have not been enabled in theirs such as automatic z-leveling and linear advance. It also increases the maximum acceleration speeds to levels which are more suited to such a capable printer. You can also apply the fan silencing modification (see the opening gist for the BX) using this firmware but you still have the option to run it without applying the modification.
+BX_UPS | Want to install a mini-UPS into your BX so that you have power loss recovery with the ability to park the print head? Want to have a way to cause the raspberry pi to shut down gracefully after flicking the power switch? This is the branch for you. If you plan to use this branch then take note of the instructions in the gist located here: COMING SOON.
 
 ![Step1](/step1_branch.png)
 
