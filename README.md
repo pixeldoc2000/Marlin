@@ -5,7 +5,9 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/marlinfirmware/marlin.svg)
 [![Build Status](https://github.com/MarlinFirmware/Marlin/workflows/CI/badge.svg?branch=bugfix-2.0.x)](https://github.com/MarlinFirmware/Marlin/actions)
 
-<img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
+<img align="right" width=175 src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCRHKSYVnwpH8K9ozq-nNtLA&psig=AOvVaw2ytBmYhtOA3F5eq87IpH_2&ust=1612380678360000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLj11p74y-4CFQAAAAAdAAAAABAM" />
+
+[//]: # (<img align="right" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />)
 
 You likely have found your way here because you are looking for the latest firmware for your BIQU machine or because you are looking for some information on how to tune your machine/resolve an issue. This repository has been developed over time to include as much valuable information as possible. In order to get the most out of it please read the readme files in detail. This will save you time and help the author to help others who's issues are not covered in this material.
 
