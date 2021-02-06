@@ -62,9 +62,6 @@ void host_action(PGM_P const pstr, const bool eol) {
 #ifdef ACTION_ON_CANCEL
   void host_action_cancel() { host_action(PSTR(ACTION_ON_CANCEL)); }
 #endif
-#ifdef ACTION_ON_START
-  void host_action_start() { host_action(PSTR(ACTION_ON_START)); }
-#endif
 
 #if ENABLED(HOST_PROMPT_SUPPORT)
 
@@ -113,19 +110,11 @@ void host_action(PGM_P const pstr, const bool eol) {
   void host_action_prompt_button(PGM_P const pstr) { host_action_prompt_plus(PSTR("button"), pstr); }
   void host_action_prompt_end() { host_action_prompt(PSTR("end")); }
   void host_action_prompt_show() { host_action_prompt(PSTR("show")); }
-
-  void _host_prompt_show(PGM_P const btn1/*=nullptr*/, PGM_P const btn2/*=nullptr*/) {
+  void host_prompt_do(const PromptReason reason, PGM_P const pstr, PGM_P const btn1/*=nullptr*/, PGM_P const btn2/*=nullptr*/) {
+    host_action_prompt_begin(reason, pstr);
     if (btn1) host_action_prompt_button(btn1);
     if (btn2) host_action_prompt_button(btn2);
     host_action_prompt_show();
-  }
-  void host_prompt_do(const PromptReason reason, PGM_P const pstr, PGM_P const btn1/*=nullptr*/, PGM_P const btn2/*=nullptr*/) {
-    host_action_prompt_begin(reason, pstr);
-    _host_prompt_show(btn1, btn2);
-  }
-  void host_prompt_do(const PromptReason reason, PGM_P const pstr, const char extra_char, PGM_P const btn1/*=nullptr*/, PGM_P const btn2/*=nullptr*/) {
-    host_action_prompt_begin(reason, pstr, extra_char);
-    _host_prompt_show(btn1, btn2);
   }
 
   void filament_load_host_prompt() {
@@ -157,14 +146,14 @@ void host_action(PGM_P const pstr, const bool eol) {
         switch (response) {
 
           case 0: // "Purge More" button
-            #if BOTH(HAS_LCD_MENU, ADVANCED_PAUSE_FEATURE)
+            #if BOTH(HAS_LCD_MENU, ADVANCED_PAUSE_FEATURE) || (ENABLED(HOST_PROMPT_SUPPORT) && ENABLED(ADVANCED_PAUSE_FEATURE))
               pause_menu_response = PAUSE_RESPONSE_EXTRUDE_MORE;  // Simulate menu selection (menu exits, doesn't extrude more)
             #endif
             filament_load_host_prompt();                          // Initiate another host prompt. (NOTE: The loop in load_filament may also do this!)
             break;
 
           case 1: // "Continue" / "Disable Runout" button
-            #if BOTH(HAS_LCD_MENU, ADVANCED_PAUSE_FEATURE)
+            #if BOTH(HAS_LCD_MENU, ADVANCED_PAUSE_FEATURE) || (ENABLED(HOST_PROMPT_SUPPORT) && ENABLED(ADVANCED_PAUSE_FEATURE))
               pause_menu_response = PAUSE_RESPONSE_RESUME_PRINT;  // Simulate menu selection
             #endif
             #if HAS_FILAMENT_SENSOR

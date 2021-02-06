@@ -24,9 +24,7 @@
 #include "../inc/MarlinConfigPre.h"
 #include "../core/types.h"
 
-//#define DEBUG_TOOLCHANGE_MIGRATION_FEATURE
-
-#if HAS_MULTI_EXTRUDER
+#if EXTRUDERS > 1
 
   typedef struct {
     #if ENABLED(TOOLCHANGE_FILAMENT_SWAP)
@@ -92,9 +90,6 @@
   inline void pe_deactivate_solenoid(const uint8_t extruder_num) { pe_set_solenoid(extruder_num, !PE_MAGNET_ON_STATE); }
 
   void pe_solenoid_init();
-
-  bool parking_extruder_unpark_after_homing(const uint8_t final_tool, bool homed_towards_final_tool);
-  void parking_extruder_set_parked();
 
 #elif ENABLED(MAGNETIC_PARKING_EXTRUDER)
 

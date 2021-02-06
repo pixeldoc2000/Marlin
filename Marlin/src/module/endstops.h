@@ -109,19 +109,11 @@ class Endstops {
     FORCE_INLINE static esbits_t state() {
       return
         #if ENDSTOP_NOISE_THRESHOLD
-          validated_live_state
+          (validated_live_state & (1 << Z_MIN)) | (live_state & esbits_t(~(1 << Z_MIN)))
         #else
           live_state
         #endif
       ;
-    }
-
-    static inline bool probe_switch_activated() {
-      return (true
-        #if ENABLED(PROBE_ACTIVATION_SWITCH)
-          && READ(PROBE_ACTIVATION_SWITCH_PIN) == PROBE_ACTIVATION_SWITCH_STATE
-        #endif
-      );
     }
 
     /**

@@ -26,7 +26,7 @@
 
 #include "../gcode.h"
 #include "../../sd/cardreader.h"
-#include "../../lcd/marlinui.h"
+#include "../../lcd/ultralcd.h"
 
 /**
  * M23: Open a file
@@ -35,8 +35,10 @@
  */
 void GcodeSuite::M23() {
   // Simplify3D includes the size, so zero out all spaces (#7227)
-  for (char *fn = parser.string_arg; *fn; ++fn) if (*fn == ' ') *fn = '\0';
-  card.openFileRead(parser.string_arg);
+ // for (char *fn = parser.string_arg; *fn; ++fn) if (*fn == ' ') *fn = '\0';
+  char *fn = parser.string_arg;
+  if(*fn == '/') fn++;
+  card.openFileRead(fn);
 
   TERN_(LCD_SET_PROGRESS_MANUALLY, ui.set_progress(0));
 }

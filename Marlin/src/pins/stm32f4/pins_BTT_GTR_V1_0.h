@@ -21,12 +21,12 @@
  */
 #pragma once
 
-#if NOT_TARGET(STM32F4)
+#ifndef TARGET_STM32F4
   #error "Oops! Select an STM32F4 board in 'Tools > Board.'"
 #elif HOTENDS > 8 || E_STEPPERS > 8
   #error "BIGTREE GTR V1.0 supports up to 8 hotends / E-steppers."
-#elif HOTENDS > MAX_E_STEPPERS || E_STEPPERS > MAX_E_STEPPERS
-  #error "Marlin extruder/hotends limit! Increase MAX_E_STEPPERS to continue."
+#elif HOTENDS > MAX_EXTRUDERS || E_STEPPERS > MAX_EXTRUDERS
+  #error "Marlin extruder/hotends limit! Increase MAX_EXTRUDERS to continue."
 #endif
 
 #define BOARD_INFO_NAME "BTT GTR V1.0"
@@ -34,9 +34,6 @@
 // Onboard I2C EEPROM
 #define I2C_EEPROM
 #define MARLIN_EEPROM_SIZE                0x2000  // 8KB (24C64 ... 64Kb = 8KB)
-
-// USB Flash Drive support
-#define HAS_OTG_USB_HOST_SUPPORT
 
 #define TP                                        // Enable to define servo and probe pins
 
@@ -50,53 +47,14 @@
 #define PS_ON_PIN                           PH6
 
 //
-// Trinamic Stallguard pins
-//
-#define X_DIAG_PIN                          PF2   // X-
-#define Y_DIAG_PIN                          PC13  // Y-
-#define Z_DIAG_PIN                          PE0   // Z-
-#define E0_DIAG_PIN                         PG14  // X+
-#define E1_DIAG_PIN                         PG9   // Y+
-#define E2_DIAG_PIN                         PD3   // Z+
-
-//
 // Limit Switches
 //
-#ifdef X_STALL_SENSITIVITY
-  #define X_STOP_PIN                  X_DIAG_PIN
-  #if X_HOME_DIR < 0
-    #define X_MAX_PIN                E0_DIAG_PIN  // X+
-  #else
-    #define X_MIN_PIN                E0_DIAG_PIN  // X+
-  #endif
-#else
-  #define X_MIN_PIN                   X_DIAG_PIN  // X-
-  #define X_MAX_PIN                  E0_DIAG_PIN  // X+
-#endif
-
-#ifdef Y_STALL_SENSITIVITY
-  #define Y_STOP_PIN                  Y_DIAG_PIN
-  #if Y_HOME_DIR < 0
-    #define Y_MAX_PIN                E1_DIAG_PIN  // Y+
-  #else
-    #define Y_MIN_PIN                E1_DIAG_PIN  // Y+
-  #endif
-#else
-  #define Y_MIN_PIN                   Y_DIAG_PIN  // Y-
-  #define Y_MAX_PIN                  E1_DIAG_PIN  // Y+
-#endif
-
-#ifdef Z_STALL_SENSITIVITY
-  #define Z_STOP_PIN                  Z_DIAG_PIN
-  #if Z_HOME_DIR < 0
-    #define Z_MAX_PIN                E2_DIAG_PIN  // Z+
-  #else
-    #define Z_MIN_PIN                E2_DIAG_PIN  // Z+
-  #endif
-#else
-  #define Z_MIN_PIN                   Z_DIAG_PIN  // Z-
-  #define Z_MAX_PIN                  E2_DIAG_PIN  // Z+
-#endif
+#define X_MIN_PIN                           PF2
+#define X_MAX_PIN                           PG14
+#define Y_MIN_PIN                           PC13
+#define Y_MAX_PIN                           PG9
+#define Z_MIN_PIN                           PE0
+#define Z_MAX_PIN                           PD3
 
 //
 // Pins on the extender
@@ -213,7 +171,7 @@
    * Hardware serial communication ports.
    * If undefined software serial is used according to the pins below
    */
-  //#define X_HARDWARE_SERIAL  Serial1
+  //#define X_HARDWARE_SERIAL  Serial
   //#define X2_HARDWARE_SERIAL Serial1
   //#define Y_HARDWARE_SERIAL  Serial1
   //#define Y2_HARDWARE_SERIAL Serial1
@@ -332,40 +290,36 @@
 // overriding pins to access.
 //
 #if SD_CONNECTION_IS(LCD)
-
   #define SD_DETECT_PIN                     PB10
   #define SDSS                              PB12
-
 #elif SD_CONNECTION_IS(ONBOARD)
-
   // Instruct the STM32 HAL to override the default SPI pins from the variant.h file
   #define CUSTOM_SPI_PINS
   #define SDSS                              PA4
-  #define SD_SS_PIN                         SDSS
-  #define SD_SCK_PIN                        PA5
-  #define SD_MISO_PIN                       PA6
-  #define SD_MOSI_PIN                       PA7
+  #define SS_PIN                            SDSS
+  #define SCK_PIN                           PA5
+  #define MISO_PIN                          PA6
+  #define MOSI_PIN                          PA7
   #define SD_DETECT_PIN                     PC4
-
 #elif SD_CONNECTION_IS(CUSTOM_CABLE)
-  #error "CUSTOM_CABLE is not a supported SDCARD_CONNECTION for this board"
+  #define "CUSTOM_CABLE is not a supported SDCARD_CONNECTION for this board"
 #endif
 
 /**
- *               -----                                             -----
+ *               _____                                             _____
  *           NC | · · | GND                                    5V | · · | GND
  *        RESET | · · | PB10(SD_DETECT)             (LCD_D7)  PG5 | · · | PG6  (LCD_D6)
  *   (MOSI)PB15 | · · | PH10(BTN_EN2)               (LCD_D5)  PG7 | · · | PG8  (LCD_D4)
  *  (SD_SS)PB12 | · · | PD10(BTN_EN1)               (LCD_RS)  PA8 | · · | PC10 (LCD_EN)
  *    (SCK)PB13 | · · | PB14(MISO)                 (BTN_ENC) PA15 | · · | PC11  (BEEPER)
- *               -----                                             -----
+ *               ￣￣                                               ￣￣
  *               EXP2                                              EXP1
  */
 
 //
 // LCDs and Controllers
 //
-#if HAS_WIRED_LCD
+#if HAS_SPI_LCD
   #define BEEPER_PIN                        PC11
   #define BTN_ENC                           PA15
 
@@ -423,25 +377,20 @@
           #define RGB_LED_B_PIN             PG5
         #endif
       #elif ENABLED(FYSETC_MINI_12864_2_1)
-        #define NEOPIXEL_PIN                PG7
+        #define NEOPIXEL_PIN                PF13
       #endif
     #endif // !FYSETC_MINI_12864
 
-    #if IS_ULTIPANEL
+    #if ENABLED(ULTIPANEL)
       #define LCD_PINS_D5                   PG7
       #define LCD_PINS_D6                   PG6
       #define LCD_PINS_D7                   PG5
-
-      #if ENABLED(REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
-        #define BTN_ENC_EN           LCD_PINS_D7  // Detect the presence of the encoder
-      #endif
-
     #endif
 
   #endif
 
   // Alter timing for graphical display
-  #if HAS_MARLINUI_U8GLIB
+  #if HAS_GRAPHICAL_LCD
     #ifndef BOARD_ST7920_DELAY_1
       #define BOARD_ST7920_DELAY_1 DELAY_NS(96)
     #endif
@@ -453,6 +402,6 @@
     #endif
   #endif
 
-#endif // HAS_WIRED_LCD
+#endif // HAS_SPI_LCD
 
 #undef TP

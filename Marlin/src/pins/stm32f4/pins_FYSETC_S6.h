@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#if NOT_TARGET(STM32F4)
+#ifndef STM32F4
   #error "Oops! Select an STM32F4 board in 'Tools > Board.'"
 #elif HOTENDS > 3 || E_STEPPERS > 3
   #error "RUMBA32 supports up to 3 hotends / E-steppers."
@@ -34,14 +34,15 @@
   #define DEFAULT_MACHINE_NAME BOARD_INFO_NAME
 #endif
 
-// Avoid conflict with TIMER_TONE defined in variant
-#define STEP_TIMER 10
+// Change the priority to 3. Priority 2 is for software serial.
+//#define TEMP_TIMER_IRQ_PRIO                  3
 
 //
 // EEPROM Emulation
 //
 #if NO_EEPROM_SELECTED
   #define FLASH_EEPROM_EMULATION
+  //#define SRAM_EEPROM_EMULATION
   //#define I2C_EEPROM
 #endif
 
@@ -50,7 +51,7 @@
   // 128 kB sector allocated for EEPROM emulation.
   #define FLASH_EEPROM_LEVELING
 #elif ENABLED(I2C_EEPROM)
-  #define MARLIN_EEPROM_SIZE              0x0800  // 2KB
+  #define MARLIN_EEPROM_SIZE              0x1000  // 4KB
 #endif
 
 //
@@ -180,9 +181,9 @@
 //
 // SPI
 //
-#define SD_SCK_PIN                          PA5
-#define SD_MISO_PIN                         PA6
-#define SD_MOSI_PIN                         PA7
+#define SCK_PIN                             PA5
+#define MISO_PIN                            PA6
+#define MOSI_PIN                            PA7
 
 //
 // Misc. Functions
@@ -198,7 +199,7 @@
 //
 // LCD / Controller
 //
-#if HAS_WIRED_LCD
+#if HAS_SPI_LCD
   #define BEEPER_PIN                        PC9
   #define BTN_ENC                           PA8
 
@@ -251,21 +252,16 @@
       #endif
     #endif // !FYSETC_MINI_12864
 
-    #if IS_ULTIPANEL
+    #if ENABLED(ULTIPANEL)
       #define LCD_PINS_D5                   PC12
       #define LCD_PINS_D6                   PD0
       #define LCD_PINS_D7                   PD1
-
-      #if ENABLED(REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
-        #define BTN_ENC_EN           LCD_PINS_D7  // Detect the presence of the encoder
-      #endif
-
     #endif
 
   #endif
 
   // Alter timing for graphical display
-  #if HAS_MARLINUI_U8GLIB
+  #if HAS_GRAPHICAL_LCD
     #ifndef BOARD_ST7920_DELAY_1
       #define BOARD_ST7920_DELAY_1  DELAY_NS(96)
     #endif
@@ -273,11 +269,11 @@
       #define BOARD_ST7920_DELAY_2  DELAY_NS(48)
     #endif
     #ifndef BOARD_ST7920_DELAY_3
-      #define BOARD_ST7920_DELAY_3 DELAY_NS(640)
+      #define BOARD_ST7920_DELAY_3 DELAY_NS(600)
     #endif
   #endif
 
-#endif // HAS_WIRED_LCD
+#endif // HAS_SPI_LCD
 
 #ifndef RGB_LED_R_PIN
   #define RGB_LED_R_PIN                     PB6

@@ -53,7 +53,8 @@ void lcd_sd_updir() {
 #endif
 
 inline void sdcard_start_selected_file() {
-  card.openAndPrintFile(card.filename);
+  EnterDir(card.filename);
+  card.openAndPrintFile(infoFile.title);
   ui.return_to_status();
   ui.reset_status();
 }
@@ -99,15 +100,15 @@ class MenuItem_sdfolder : public MenuItem_sdbase {
       encoderTopLine = 0;
       ui.encoderPosition = 2 * (ENCODER_STEPS_PER_MENU_ITEM);
       ui.screen_changed = true;
-      TERN_(HAS_MARLINUI_U8GLIB, ui.drawing_screen = false);
+      TERN_(HAS_GRAPHICAL_LCD, ui.drawing_screen = false);
       ui.refresh();
     }
 };
 
-void menu_media() {
+void menu_media_source() {
   ui.encoder_direction_menus();
 
-  #if HAS_MARLINUI_U8GLIB
+  #if HAS_GRAPHICAL_LCD
     static uint16_t fileCnt;
     if (ui.first_page) fileCnt = card.get_num_Files();
   #else
@@ -115,10 +116,26 @@ void menu_media() {
   #endif
 
   START_MENU();
-  BACK_ITEM_P(TERN1(BROWSE_MEDIA_ON_INSERT, screen_history_depth) ? GET_TEXT(MSG_MAIN) : GET_TEXT(MSG_BACK));
+  switch (infoFile.source) {
+    case TFT_SD:
+      BACK_ITEM(MSG_MEDIA_TFTSD_MENU);
+      break;
+
+    case TFT_UDISK:
+      BACK_ITEM(MSG_MEDIA_UDISK_MENU);
+      break;
+
+    case BOARD_SD:
+      BACK_ITEM(MSG_MEDIA_BOARDSD_MENU);
+      break;
+
+    default: break;
+
+  }
+
   if (card.flag.workDirIsRoot) {
     #if !PIN_EXISTS(SD_DETECT)
-      ACTION_ITEM(MSG_REFRESH, []{ encoderTopLine = 0; card.mount(); });
+      ACTION_ITEM(MSG_REFRESH, []{ encoderTopLine = 0; card.mount(false); scanPrintFilesFatFs();});
     #endif
   }
   else if (card.isMounted())
@@ -134,7 +151,52 @@ void menu_media() {
     }
     else
       SKIP_ITEM();
+    }
+
+  END_MENU();
+}
+
+bool reseted = false;
+void menu_media_tftsd() {
+  if (!reseted) {
+    infoFile.source = TFT_SD;
+    resetInfoFile();
+    card.flag.workDirIsRoot = true;
+    scanPrintFilesFatFs();
+    reseted = true;
   }
+  menu_media_source();
+}
+
+void menu_media_udisk() {
+  if (!reseted) {
+    infoFile.source = TFT_UDISK;
+    resetInfoFile();
+    card.flag.workDirIsRoot = true;
+    scanPrintFilesFatFs();
+    reseted = true;
+  }
+  menu_media_source();
+}
+
+void menu_media_boardsd() {
+  if (!reseted) {
+    infoFile.source = BOARD_SD;
+    resetInfoFile();
+    card.flag.workDirIsRoot = true;
+    scanPrintFilesFatFs();
+    reseted = true;
+  }
+  menu_media_source();
+}
+
+void menu_media() {
+  reseted = false;
+  START_MENU();
+  BACK_ITEM(MSG_MAIN);
+  SUBMENU(MSG_MEDIA_TFTSD_MENU, menu_media_tftsd);
+  SUBMENU(MSG_MEDIA_UDISK_MENU, menu_media_udisk);
+  SUBMENU(MSG_MEDIA_BOARDSD_MENU, menu_media_boardsd);
   END_MENU();
 }
 

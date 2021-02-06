@@ -38,22 +38,13 @@ void draw_fan_status(uint16_t x, uint16_t y, const bool blink);
 void menu_line(const uint8_t row, uint16_t color = COLOR_BACKGROUND);
 void menu_item(const uint8_t row, bool sel = false);
 
-#if HAS_UI_480x320
-  #define MENU_FONT_NAME    Helvetica18
-  #define SYMBOLS_FONT_NAME Helvetica18_symbols
-  #define MENU_ITEM_HEIGHT  43
-  #define FONT_LINE_HEIGHT  34
-#elif HAS_UI_480x272
-  #define MENU_FONT_NAME    Helvetica14
-  #define SYMBOLS_FONT_NAME Helvetica14_symbols
-  #define MENU_ITEM_HEIGHT  36
-  #define FONT_LINE_HEIGHT  24
-#endif
+#define MENU_FONT_NAME    Helvetica18
+#define SYMBOLS_FONT_NAME Helvetica18_symbols
 
 #define ABSOLUTE_ZERO     -273.15
 
 const tImage Images[imgCount] = {
-  TERN(SHOW_BOOTSCREEN, TERN(BOOT_MARLIN_LOGO_SMALL, MarlinLogo195x59x16, MarlinLogo480x320x16), NoLogo),
+  MarlinLogo195x59x16,
   HotEnd_64x64x4,
   Bed_64x64x4,
   Bed_Heated_64x64x4,
@@ -82,8 +73,6 @@ const tImage Images[imgCount] = {
   Refresh_32x32x4,
   Leveling_32x32x4,
   Slider8x16x4,
-  Home_64x64x4,
-  BtnRounded_64x52x4,
 };
 
 #if HAS_TEMP_CHAMBER && HOTENDS > 1
