@@ -31,7 +31,7 @@ These guides should **definitely** be reviewed if you are assembling your machin
 
 BIQU Machine Model | Mechanical setup guide
 ------------ | -------------
-BIQU BX | Coming soon
+BIQU BX | https://gist.github.com/looxonline/7f6a628debfa35c60a7dd3dc225d95bc
 BIQU B1 | https://gist.github.com/looxonline/808a204f4f881462403f2baeefc1f69b
 
 ## Using the firmware from this repo.
