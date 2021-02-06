@@ -22,7 +22,12 @@ BIQU B1 | 2.0.7.2 | 25 December 2020
 
 Many people experience issues which they believe can be solved by firmware but are actually mechanical in nature. In order to help people to solve such issues several "gists" have been compiled which guide you on how to set up the mechanics of your machine. While it is always recommended to run the latest firmware you should definitely take the time to read through these guides first as there are some issues which not even the most refined firmware will solve.
 
-These guides should **definitely** be reviewed if you are assembling your machine for the first time but they should also be reviewed even if you have assembled your machine and just want to squeeze the most out of it. Some of the key issues that they will help you to address are uneven first layers and the nozzle hitting prints.
+These guides should **definitely** be reviewed if you are assembling your machine for the first time but they should also be reviewed even if you have assembled your machine and just want to squeeze the most out of it. Following the steps in these guides will help you to avoid such things as:
+
+1. Uneven first layers.
+2. Nozzle hitting prints.
+3. Z-banding
+4. Many other print defects caused by poor mechanics.
 
 BIQU Machine Model | Mechanical setup guide
 ------------ | -------------
