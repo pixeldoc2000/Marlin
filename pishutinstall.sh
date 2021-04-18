@@ -28,6 +28,26 @@
 # Make sure that we are in the correct directory
 cd /home/pi
 
+echo ""
+echo "Starting mod installation..............................."
+echo ""
+
+echo ""
+echo "Updating packages required for the mod."
+echo ""
+
+# Make sure that we have all the latest refs to updates
+sudo apt-get update
+
+# Get the required libs for the python script to function
+sudo apt-get -y install python-pip
+sudo apt-get -y install python3-dev python3-rpi.gpio
+
+echo ""
+echo "Creating the python script that drives the mod."
+echo ""
+
+
 # Check for a python script and erase if one exists
 if [ -f shutpi.py ]; then
     sudo rm shutpi.py
@@ -76,8 +96,16 @@ while 1:
     time.sleep(1)
 END_SCRIPT
 
+echo""
+echo "Providing execcution rights to the script."
+echo""
+
 # Give the script execution rights
 sudo chmod 755 shutpi.py
+
+echo ""
+echo "Adding the script to the boot sequence."
+echo ""
 
 # Add it to the rc.local so that it will start on boot
 
@@ -89,3 +117,11 @@ else
     # Not there so let's add it
     sudo sed -i -e '$i \sudo python3 /home/pi/shutpi.py &\n' /etc/rc.local
 fi
+
+echo ""
+echo "Mod complete."
+echo ""
+echo "Please reboot your pi using 'sudo reboot' for the mod to become active."
+echo ""
+echo "Enjoy."
+echo ""
