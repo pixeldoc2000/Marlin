@@ -54,7 +54,8 @@
 #define FIL_RUNOUT2_PIN                     PB13
 
 #ifdef BTT_SKR_SE_BX_WITHBOOT
-  #define LED_PIN                             PA13
+  //#define LED_PIN                             PA13
+  #define POWER_LOSS_BUFFER_PIN             PA13      // Used to buffer the power loss signal to the pi.
   #define BEEPER_PIN                          PA14
 #endif
 
