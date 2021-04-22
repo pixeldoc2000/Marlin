@@ -70,14 +70,12 @@ import os
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Pull up instead of relying in the weak pullup from the motherboard
+GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Pull up instead of relying in the weak pullup from the motherboard
 
 
 # Our function on what to do when the power is cut
 
 def Shutdown(channel):
-    #print("Shutting Down")
-    #time.sleep(5)
     os.system("sudo shutdown -h now")
 
 
