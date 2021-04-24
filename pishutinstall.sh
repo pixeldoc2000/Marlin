@@ -85,7 +85,7 @@ time.sleep(10)
 
 # Add our function to execute when the button pressed event happens
 
-GPIO.add_event_detect(4, GPIO.RISING, callback=Shutdown, bouncetime=200)
+GPIO.add_event_detect(4, GPIO.RISING, callback=Shutdown, bouncetime=1650)
 
 
 # Now wait!
