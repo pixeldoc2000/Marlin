@@ -70,7 +70,7 @@ import os
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Pull up instead of relying in the weak pullup from the motherboard
+GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Pull down instead of relying in the weak pullup from the motherboard
 
 
 # Our function on what to do when the power is cut
@@ -85,7 +85,7 @@ time.sleep(10)
 
 # Add our function to execute when the button pressed event happens
 
-GPIO.add_event_detect(3, GPIO.RISING, callback=Shutdown, bouncetime=50)
+GPIO.add_event_detect(4, GPIO.RISING, callback=Shutdown, bouncetime=200)
 
 
 # Now wait!
