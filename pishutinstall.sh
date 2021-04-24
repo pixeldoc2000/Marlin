@@ -62,6 +62,8 @@ cat >shutpi.py <<'END_SCRIPT'
 
 import RPi.GPIO as GPIO
 
+import threading
+
 import time
 
 import os
@@ -72,11 +74,16 @@ GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Pull down instead of relying in the weak pullup from the motherboard
 
+# Function to double check edge value after 1.6s
+def DoubleCheck():
+    if GPIO.input(4):
+        os.system("sudo shutdown -h now")
 
-# Our function on what to do when the power is cut
-
+# Initial function on edge.
 def Shutdown(channel):
-    os.system("sudo shutdown -h now")
+    t = threading.Timer(1.6, DoubleCheck)
+    t.start()
+    #os.system("sudo shutdown -h now")
 
 
 # Allow time for the power to settle after initial boot.
@@ -85,7 +92,7 @@ time.sleep(10)
 
 # Add our function to execute when the button pressed event happens
 
-GPIO.add_event_detect(4, GPIO.RISING, callback=Shutdown, bouncetime=1650)
+GPIO.add_event_detect(4, GPIO.RISING, callback=Shutdown, bouncetime=1750)
 
 
 # Now wait!
