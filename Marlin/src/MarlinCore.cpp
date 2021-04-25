@@ -711,7 +711,7 @@ inline void manage_inactivity(const bool ignore_stepper_queue=false) {
   #define VIN_ERROR_WINDOW 3    // +-3V error range
   uint8_t safe_power_vin_supported(float vin) {
 
-    uint8_t  supported_vin[] = {12, 24}; // support 12V / 24V input.
+    uint8_t  supported_vin[] = {24}; // support 12V / 24V input.
     for (uint8_t i = 0 ; i < COUNT(supported_vin); i++) {
       if (ABS(vin - supported_vin[i]) < VIN_ERROR_WINDOW) {
         return true;
@@ -819,15 +819,15 @@ inline void manage_inactivity(const bool ignore_stepper_queue=false) {
     uint8_t failed_status = 0;
     OUT_WRITE(SAFE_POWER_PIN, LOW);
     #if PIN_EXISTS(POWER_LOSS)
-      //uint16_t power_stabilization_count = 0;
-      //uint16_t power_stabilization_max = 250;   // Measured in increments of 10ms.
+      uint16_t power_stabilization_count = 0;
+      uint16_t power_stabilization_max = 100;   // Measured in increments of 50ms.
       // If the power loss pin is enabled it means that we have a mini UPS and need to slow the boot process to allow time for the caps to charge.
       //delay(3500);
-      //while (!safe_power_vin_supported(safe_power_vin()))
-      //{
-        //delay(10);
-
-      //}
+      while (!safe_power_vin_supported(safe_power_vin()))
+      {
+        delay(50);
+        if (++power_stabilization_count >= power_stabilization_max) break;
+      }
     #endif
     
     if (!safe_power_vin_supported(safe_power_vin())) {
