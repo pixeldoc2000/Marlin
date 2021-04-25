@@ -818,6 +818,18 @@ inline void manage_inactivity(const bool ignore_stepper_queue=false) {
   void safe_power_selfcheck() {
     uint8_t failed_status = 0;
     OUT_WRITE(SAFE_POWER_PIN, LOW);
+    #if PIN_EXISTS(POWER_LOSS)
+      //uint16_t power_stabilization_count = 0;
+      //uint16_t power_stabilization_max = 250;   // Measured in increments of 10ms.
+      // If the power loss pin is enabled it means that we have a mini UPS and need to slow the boot process to allow time for the caps to charge.
+      //delay(3500);
+      //while (!safe_power_vin_supported(safe_power_vin()))
+      //{
+        //delay(10);
+
+      //}
+    #endif
+    
     if (!safe_power_vin_supported(safe_power_vin())) {
       failed_status |= 1 << 0;
     }
